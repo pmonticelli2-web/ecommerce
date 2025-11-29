@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prospetto Strategico: E-commerce €1M Sprint</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons (Phosphor Icons - Lightweight, no SVG injection needed in body) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F1F5F9; /* Slate 100 */
+            color: #1E293B; /* Slate 800 */
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* Max width constraint */
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 400px;
+        }
+
+        /* Custom Scrollbar for panels */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .active-tab {
+            border-bottom: 2px solid #4F46E5;
+            color: #4F46E5;
+            font-weight: 600;
+        }
+        
+        .inactive-tab {
+            color: #64748B;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-tab:hover {
+            color: #334155;
+        }
+    </style>
+
+    <!-- Chosen Palette: Slate (Backgrounds/Text) + Indigo (Primary Action/Highlight) + Emerald (Success) + Rose (Risk) -->
+    <!-- Application Structure Plan:
+         1. Header: Formal Title & Objective Statement.
+         2. Simulation Module (Phase 1): Interactive Inputs for AOV/CR -> Outputs Traffic/Transactios. Shows the math behind the strategy.
+         3. Scaling Visualization (Phase 2): Chart showing the 90-day ramp-up of Spend vs Revenue.
+         4. Tactical Operations (Phase 2 & 3): Tabbed interface for Ads, CRO, and Tech protocols.
+         5. Logistics & Risk (Phase 4): Checklist and warning system.
+         Why: The source text is highly formal and strategic. A "Dashboard" aesthetic suits the "Prospetto Strategico" tone, allowing the user to "control" the variables of the plan. -->
+    <!-- Visualization & Content Choices:
+         - Simulation: Inputs/Outputs to prove the "High AOV" thesis. Interaction: Range sliders update DOM text.
+         - Line Chart: Visualizes "Accelerazione Scalare Intensiva". Interaction: Tooltips.
+         - Tabs: Organizes dense text (Meta Ads, Google Ads, CRO) into digestible sections without scrolling.
+         - CONFIRMATION: NO SVG graphics used (using Phosphor icon font library). NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Top Navigation / Status Bar -->
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="ph ph-strategy text-2xl text-indigo-400"></i>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight">PROSPETTO STRATEGICO: €1M SPRINT</h1>
+                    <p class="text-xs text-slate-400 uppercase tracking-widest">Orizzonte Temporale: 90 Giorni</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-sm">
+                <div class="flex flex-col items-end">
+                    <span class="text-slate-400 text-xs">Obiettivo Trimestrale</span>
+                    <span class="font-mono text-indigo-300 font-bold">€ 1.000.000,00</span>
+                </div>
+                <div class="h-8 w-px bg-slate-700"></div>
+                <div class="flex flex-col items-end">
+                    <span class="text-slate-400 text-xs">Stato Operativo</span>
+                    <span class="flex items-center gap-2 text-emerald-400 font-semibold">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        Attivo
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex-grow space-y-8">
+
+        <!-- Executive Summary Section -->
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <div class="flex items-start gap-4">
+                <div class="bg-indigo-50 p-3 rounded-lg text-indigo-700 hidden sm:block">
+                    <i class="ph ph-info text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800 mb-2">Premessa Esecutiva</h2>
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                        Il conseguimento di €1.000.000 in 90 giorni richiede l'armoniosa confluenza di capitale di rischio ingente, un'offerta di prodotto superiore e una rigorosa infrastruttura esecutiva.
+                        Questo prospetto si fonda sull'<strong>accelerazione scalare intensiva</strong>, postulando una preesistente validazione del prodotto.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 1: SIMULATION MODULE -->
+        <section>
+            <div class="mb-4">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <span class="bg-slate-800 text-white text-xs px-2 py-1 rounded">FASE 1</span>
+                    Postulazione della Base Economica
+                </h3>
+                <p class="text-slate-500 text-sm mt-1">
+                    Simulazione dell'impatto dell'AOV (Valore Medio Ordine) sul fabbisogno di traffico.
+                    <span class="italic text-indigo-600 font-medium">L'obiettivo è minimizzare il volume transazionale.</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Controls -->
+                <div class="lg:col-span-4 bg-white rounded-xl shadow-lg border border-slate-200 p-6">
+                    <h4 class="font-semibold text-slate-700 mb-6 border-b pb-2">Parametri di Input</h4>
+                    
+                    <!-- AOV Slider -->
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-medium text-slate-600">AOV (Valore Ordine Medio)</label>
+                            <span id="aovDisplay" class="text-sm font-bold text-indigo-600">€ 400</span>
+                        </div>
+                        <input type="range" id="aovInput" min="50" max="1000" step="10" value="400" 
+                            class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                        <div class="flex justify-between text-xs text-slate-400 mt-1">
+                            <span>€50 (Low-Ticket)</span>
+                            <span>€1000 (High-Ticket)</span>
+                        </div>
+                    </div>
+
+                    <!-- CR Slider -->
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-medium text-slate-600">Tasso di Conversione (CR)</label>
+                            <span id="crDisplay" class="text-sm font-bold text-indigo-600">3.0%</span>
+                        </div>
+                        <input type="range" id="crInput" min="0.5" max="5.0" step="0.1" value="3.0" 
+                            class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                         <div class="flex justify-between text-xs text-slate-400 mt-1">
+                            <span>0.5%</span>
+                            <span>5.0%</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-lg p-4 text-xs text-indigo-800">
+                        <i class="ph ph-lightbulb mb-1 inline-block"></i>
+                        <strong>Implicazione Operativa:</strong><br>
+                        Un AOV elevato riduce drasticamente lo stress logistico. Notare come il fabbisogno di traffico crolli aumentando l'AOV.
+                    </div>
+
+                    <!-- Gemini Feature 2: Creative Prompt Generator -->
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <h4 class="font-semibold text-slate-700 mb-3">Generazione Creativa ✨</h4>
+                        <select id="nicheSelect" class="w-full p-2 border border-slate-300 rounded-lg mb-3 text-sm text-slate-700 bg-white">
+                            <option value="B2B">B2B (Strumentazione Specialistica)</option>
+                            <option value="Lusso">Lusso (Arredo di Design)</option>
+                            <option value="Formazione">Formazione (Corsi di Eccellenza)</option>
+                        </select>
+                        <button onclick="generateCreativePrompt()" class="w-full bg-emerald-600 text-white font-semibold py-2 rounded-lg hover:bg-emerald-700 transition duration-150 flex items-center justify-center text-sm" id="creativeBtn">
+                            <i class="ph ph-sparkle mr-2"></i> Genera Prompt High-Ticket
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Outputs -->
+                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Metric Card 1 -->
+                    <div class="bg-slate-800 text-white rounded-xl p-6 flex flex-col justify-between card-hover relative overflow-hidden">
+                        <div class="relative z-10">
+                            <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Transazioni Totali (90gg)</div>
+                            <div id="totalTransactions" class="text-3xl font-bold">2,500</div>
+                            <div class="text-slate-400 text-xs mt-2">Ordini necessari per €1M</div>
+                        </div>
+                        <i class="ph ph-shopping-cart absolute bottom-[-10px] right-[-10px] text-8xl text-slate-700 opacity-20"></i>
+                    </div>
+
+                    <!-- Metric Card 2 -->
+                    <div class="bg-white text-slate-800 rounded-xl p-6 border border-slate-200 flex flex-col justify-between card-hover relative overflow-hidden">
+                        <div class="relative z-10">
+                            <div class="text-slate-500 text-xs uppercase tracking-wider mb-1">Ordini Giornalieri</div>
+                            <div id="dailyOrders" class="text-3xl font-bold text-indigo-600">28</div>
+                            <div class="text-slate-400 text-xs mt-2">Media sostenibile</div>
+                        </div>
+                        <i class="ph ph-package absolute bottom-[-10px] right-[-10px] text-8xl text-indigo-100 opacity-50"></i>
+                    </div>
+
+                    <!-- Metric Card 3 -->
+                    <div class="bg-white text-slate-800 rounded-xl p-6 border border-slate-200 flex flex-col justify-between card-hover relative overflow-hidden">
+                        <div class="relative z-10">
+                            <div class="text-slate-500 text-xs uppercase tracking-wider mb-1">Traffico Giornaliero</div>
+                            <div id="dailyTraffic" class="text-3xl font-bold text-emerald-600">933</div>
+                            <div class="text-slate-400 text-xs mt-2">Visitatori unici richiesti</div>
+                        </div>
+                        <i class="ph ph-users absolute bottom-[-10px] right-[-10px] text-8xl text-emerald-100 opacity-50"></i>
+                    </div>
+
+                    <!-- Analysis Box -->
+                    <div class="md:col-span-3 bg-white rounded-xl border border-slate-200 p-6">
+                        <h4 class="font-semibold text-slate-800 text-sm mb-2">Analisi del Fabbisogno</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-check-circle text-emerald-500"></i>
+                                <span>Margine Lordo consigliato: <strong>50% - 70%</strong></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-check-circle text-emerald-500"></i>
+                                <span>Segmenti: <strong>B2B, Lusso, High-Ticket</strong></span>
+                            </div>
+                        </div>
+                        <!-- Creative Prompt Output -->
+                        <div id="creativePromptOutput" class="mt-4 p-3 bg-slate-50 rounded-lg hidden">
+                            <h5 class="text-xs font-semibold text-slate-700 mb-1 flex items-center gap-1">
+                                <i class="ph ph-pencil-line"></i> Prompt Generato:
+                            </h5>
+                            <p id="promptText" class="text-sm text-slate-600 font-mono"></p>
+                            <button onclick="copyToClipboard('promptText')" class="mt-2 text-xs text-indigo-600 hover:text-indigo-800 transition">
+                                Copia
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 2: SCALING VISUALIZATION -->
+        <section>
+            <div class="mb-4">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <span class="bg-slate-800 text-white text-xs px-2 py-1 rounded">FASE 2</span>
+                    Implementazione della Scalabilità Intensiva
+                </h3>
+                <p class="text-slate-500 text-sm mt-1">
+                    Proiezione dell'iniezione di capitale nel circuito pubblicitario (Ad Spend) rispetto alla curva dei ricavi.
+                    <span class="italic text-rose-600 font-medium">Nota: Approccio aggressivo nel bidding.</span>
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-6">
+                <!-- Chart Container -->
+                <div class="chart-container">
+                    <canvas id="scalingChart"></canvas>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6 border-t pt-6">
+                    <div>
+                        <div class="text-xs font-bold text-slate-400 uppercase mb-1">Budget Iniziale (Mese 1)</div>
+                        <div class="text-lg font-bold text-slate-800">€ 150.000 - 200.000</div>
+                        <p class="text-xs text-slate-500 mt-1">Necessario per saturare i canali e superare l'apprendimento algoritmico.</p>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-slate-400 uppercase mb-1">Regola Scaling</div>
+                        <div class="text-lg font-bold text-indigo-600">+20-30% ogni 48h</div>
+                        <p class="text-xs text-slate-500 mt-1">Finché il CPA rimane < 70% del margine lordo.</p>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-slate-400 uppercase mb-1">KPI Critico</div>
+                        <div class="text-lg font-bold text-emerald-600">ROAS ≥ 3.5x</div>
+                        <p class="text-xs text-slate-500 mt-1">Soglia minima per coprire COGS e OPEX.</p>
+                    </div>
+
+                    <!-- Gemini Feature 1: Risk Analysis Button -->
+                    <div class="flex flex-col justify-end">
+                        <button onclick="analyzeRisk('Ad Fatigue')" class="w-full bg-rose-600 text-white font-semibold py-2 rounded-lg hover:bg-rose-700 transition duration-150 flex items-center justify-center text-sm" id="riskBtn">
+                            <i class="ph ph-sparkle mr-2"></i> Analisi Rischio Implicito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Risk Analysis Output -->
+            <div id="riskAnalysisOutput" class="bg-white rounded-xl shadow-sm border border-rose-200 p-6 mt-6 hidden">
+                <h4 class="font-bold text-rose-800 mb-2 flex items-center gap-2">
+                    <i class="ph ph-strategy text-lg"></i>
+                    Piano d'Azione Proattivo: <span id="riskTopic"></span>
+                </h4>
+                <div id="analysisText" class="text-sm text-slate-700 leading-relaxed min-h-[50px]">
+                    <!-- Output will be displayed here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TACTICAL PROTOCOLS (TABS) -->
+        <section>
+             <div class="mb-4">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <span class="bg-slate-800 text-white text-xs px-2 py-1 rounded">OPERATIVITÀ</span>
+                    Protocolli Tattici e CRO
+                </h3>
+                <p class="text-slate-500 text-sm">Dettaglio delle metodologie di acquisizione e ottimizzazione della conversione.</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <!-- Tab Headers -->
+                <div class="flex border-b border-slate-200 bg-slate-50">
+                    <button class="flex-1 py-4 text-center text-sm transition-colors active-tab" onclick="switchTab('meta')">
+                        <i class="ph ph-facebook-logo mr-1"></i> Meta Ads
+                    </button>
+                    <button class="flex-1 py-4 text-center text-sm transition-colors inactive-tab" onclick="switchTab('google')">
+                        <i class="ph ph-google-logo mr-1"></i> Google Ads
+                    </button>
+                    <button class="flex-1 py-4 text-center text-sm transition-colors inactive-tab" onclick="switchTab('cro')">
+                        <i class="ph ph-lightning mr-1"></i> Ottimizzazione (CRO)
+                    </button>
+                </div>
+
+                <!-- Tab Content: Meta -->
+                <div id="tab-meta" class="p-8 block">
+                    <h4 class="font-bold text-slate-800 mb-4">Strategia Meta (Facebook/Instagram)</h4>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 text-indigo-600 font-bold">1</div>
+                            <div>
+                                <h5 class="font-semibold text-slate-800">Broad Targeting</h5>
+                                <p class="text-sm text-slate-600">Nessuna micro-segmentazione. Ampia segmentazione demografica per permettere all'AI di trovare i clienti migliori.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 text-indigo-600 font-bold">2</div>
+                            <div>
+                                <h5 class="font-semibold text-slate-800">Approccio Creative-First</h5>
+                                <p class="text-sm text-slate-600">Asset percepiti come contenuto nativo (UGC, Demo Prodotto). Rotazione ogni 5-7 giorni per evitare l'<strong>Ad Fatigue</strong> (saturazione percettiva).</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 text-indigo-600 font-bold">3</div>
+                            <div>
+                                <h5 class="font-semibold text-slate-800">Advantage+ Shopping Campaign (ASC)</h5>
+                                <p class="text-sm text-slate-600">Allocazione automatica del budget verso i segmenti con le performance di conversione più elevate.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Google -->
+                <div id="tab-google" class="p-8 hidden">
+                    <h4 class="font-bold text-slate-800 mb-4">Strategia Google (Search & Shopping)</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                            <h5 class="font-semibold text-slate-800 mb-2 flex items-center gap-2">
+                                <i class="ph ph-target text-rose-500"></i> Intenzione Esplicita
+                            </h5>
+                            <p class="text-sm text-slate-600">Focalizzazione su <strong>long-tail keywords</strong> altamente specifiche. <br><em>Es: "Divano pelle design italiano modulare" vs "Divano".</em></p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                            <h5 class="font-semibold text-slate-800 mb-2 flex items-center gap-2">
+                                <i class="ph ph-currency-dollar text-emerald-500"></i> Bidding Aggressivo
+                            </h5>
+                            <p class="text-sm text-slate-600">L'AOV elevato permette un CPC (Costo per Click) superiore rispetto ai concorrenti Low-Ticket, garantendo il posizionamento dominante.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: CRO -->
+                <div id="tab-cro" class="p-8 hidden">
+                    <h4 class="font-bold text-slate-800 mb-4">Ottimizzazione Tasso di Conversione (FASE 3)</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                            <i class="ph ph-gauge text-xl text-indigo-600 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-800 text-sm">Performance Tecnica</strong>
+                                <p class="text-xs text-slate-500">Tempo caricamento < 2 secondi. Mobile-first design obbligatorio (90% traffico da mobile).</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                            <i class="ph ph-shield-check text-xl text-indigo-600 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-800 text-sm">Validazione Esterna</strong>
+                                <p class="text-xs text-slate-500">Recensioni verificate (Trustpilot) e indicatori di fiducia (Trust Badges) in punti nevralgici.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                            <i class="ph ph-credit-card text-xl text-indigo-600 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-800 text-sm">Checkout Semplificato</strong>
+                                <p class="text-xs text-slate-500">Configurazione a singola pagina. Upsell/Downsell immediati nel carrello per massimizzare l'AOV.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 4: LOGISTICS & RISK -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
+            <!-- Logistics -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <span class="bg-slate-800 text-white text-xs px-2 py-1 rounded">FASE 4</span>
+                    Gestione Logistica
+                </h3>
+                <div class="space-y-4">
+                    <label class="flex items-center space-x-3 cursor-pointer group">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 rounded focus:ring-indigo-500 border-slate-300" checked disabled>
+                        <span class="text-sm text-slate-700 group-hover:text-indigo-600 transition-colors">Pre-Acquisto Stock (Copertura 4 settimane)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 cursor-pointer group">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 rounded focus:ring-indigo-500 border-slate-300" checked disabled>
+                        <span class="text-sm text-slate-700 group-hover:text-indigo-600 transition-colors">Esternalizzazione 3PL Scalabile</span>
+                    </label>
+                    <label class="flex items-center space-x-3 cursor-pointer group">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 rounded focus:ring-indigo-500 border-slate-300" checked disabled>
+                        <span class="text-sm text-slate-700 group-hover:text-indigo-600 transition-colors">Assistenza Clienti 24/7 (Live Chat)</span>
+                    </label>
+                    <div class="text-xs text-rose-500 mt-2 bg-rose-50 p-2 rounded">
+                        <i class="ph ph-warning"></i> La gestione interna delle spedizioni è altamente sconsigliata.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Warning -->
+            <div class="bg-rose-50 rounded-xl border border-rose-100 p-6">
+                 <h3 class="text-lg font-bold text-rose-800 mb-4 flex items-center gap-2">
+                    <i class="ph ph-siren"></i>
+                    Avvertenze sui Rischi
+                </h3>
+                <p class="text-sm text-rose-700 leading-relaxed mb-4">
+                    La strategia delineata è associata a un <strong>rischio di impresa elevatissimo</strong>. Discrepanze nella calibrazione del prodotto, della politica di prezzo, o nella gestione del budget pubblicitario possono comportare perdite finanziarie significative.
+                </p>
+                <div class="text-xs font-mono bg-white p-3 rounded border border-rose-200 text-rose-600">
+                    STATUS: OPERAZIONE SPRINT AD ALTA VELOCITÀ
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
+        const API_KEY = ""; // Provided by environment
+
+        // State Management
+        const state = {
+            aov: 400,
+            cr: 3.0,
+            targetRevenue: 1000000,
+            days: 90
+        };
+
+        // DOM Elements
+        const elAovInput = document.getElementById('aovInput');
+        const elAovDisplay = document.getElementById('aovDisplay');
+        const elCrInput = document.getElementById('crInput');
+        const elCrDisplay = document.getElementById('crDisplay');
+        const elTotalTrans = document.getElementById('totalTransactions');
+        const elDailyOrders = document.getElementById('dailyOrders');
+        const elDailyTraffic = document.getElementById('dailyTraffic');
+        const elRiskAnalysisOutput = document.getElementById('riskAnalysisOutput');
+        const elAnalysisText = document.getElementById('analysisText');
+        const elRiskTopic = document.getElementById('riskTopic');
+        const elRiskBtn = document.getElementById('riskBtn');
+        const elNicheSelect = document.getElementById('nicheSelect');
+        const elCreativeBtn = document.getElementById('creativeBtn');
+        const elCreativePromptOutput = document.getElementById('creativePromptOutput');
+        const elPromptText = document.getElementById('promptText');
+
+        // Formatter
+        const formatNumber = (num) => new Intl.NumberFormat('it-IT').format(Math.round(num));
+
+        // Core Calculation Logic
+        function updateSimulation() {
+            state.aov = parseInt(elAovInput.value);
+            state.cr = parseFloat(elCrInput.value);
+
+            elAovDisplay.textContent = `€ ${state.aov}`;
+            elCrDisplay.textContent = `${state.cr.toFixed(1)}%`;
+
+            const totalTransactions = state.targetRevenue / state.aov;
+            const dailyOrders = totalTransactions / state.days;
+            const dailyTraffic = dailyOrders / (state.cr / 100);
+
+            elTotalTrans.textContent = formatNumber(totalTransactions);
+            elDailyOrders.textContent = formatNumber(dailyOrders);
+            elDailyTraffic.textContent = formatNumber(dailyTraffic);
+        }
+
+        // Event Listeners for Simulation
+        elAovInput.addEventListener('input', updateSimulation);
+        elCrInput.addEventListener('input', updateSimulation);
+
+        // Functional Navigation (Tabs)
+        function switchTab(tabId) {
+            ['meta', 'google', 'cro'].forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('block');
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+
+            const tabs = document.querySelectorAll('button[onclick^="switchTab"]');
+            tabs.forEach(tab => {
+                tab.classList.remove('active-tab');
+                tab.classList.add('inactive-tab');
+            });
+
+            const activeBtn = Array.from(tabs).find(t => t.getAttribute('onclick').includes(tabId));
+            if(activeBtn) {
+                activeBtn.classList.remove('inactive-tab');
+                activeBtn.classList.add('active-tab');
+            }
+        }
+
+        // --- Gemini Feature 1: Risk Analysis ---
+        async function analyzeRisk(riskType) {
+            elRiskBtn.disabled = true;
+            elRiskBtn.textContent = 'Analisi in corso...';
+            elRiskAnalysisOutput.classList.remove('hidden');
+            elAnalysisText.innerHTML = '<div class="flex items-center justify-center min-h-[50px]"><i class="ph ph-spinner text-2xl animate-spin text-rose-600"></i></div>';
+            elRiskTopic.textContent = riskType;
+
+            const systemPrompt = "Sei un analista strategico di e-commerce. Genera un piano d'azione proattivo conciso (1-2 paragrafi) e professionale per mitigare il rischio specificato. Rispondi solo con il piano d'azione in italiano, senza introduzioni o saluti.";
+            const userQuery = `Il rischio da mitigare è: ${riskType}. Descrivi il piano d'azione per un'azienda High-Ticket che sta scalando rapidamente.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            try {
+                const response = await fetchWithRetry(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text || "Errore di generazione. Riprovare.";
+                elAnalysisText.textContent = text;
+            } catch (error) {
+                elAnalysisText.textContent = 'Errore di connessione o generazione. Verificare la console.';
+                console.error(error);
+            } finally {
+                elRiskBtn.disabled = false;
+                elRiskBtn.textContent = 'Analisi Rischio Implicito';
+            }
+        }
+
+        // --- Gemini Feature 2: Creative Prompt Generator ---
+        async function generateCreativePrompt() {
+            elCreativeBtn.disabled = true;
+            elCreativeBtn.textContent = 'Generazione...';
+            elCreativePromptOutput.classList.remove('hidden');
+            elPromptText.textContent = 'Caricamento...';
+
+            const niche = elNicheSelect.value;
+            const systemPrompt = "Sei un copywriter esperto in High-Ticket e un generatore di prompt per l'AI. Devi creare un prompt di testo estremamente dettagliato per la generazione di un'immagine o di un breve video destinato alle campagne Meta Ads (Creative-First). Il prompt deve focalizzarsi sulla prova sociale e sul lusso/valore, specifico per la nicchia fornita. Rispondi SOLO con il prompt, formattato come una singola stringa, in italiano. NON aggiungere spiegazioni, saluti, o commenti aggiuntivi.";
+            const userQuery = `Genera un prompt creativo per un prodotto High-Ticket nella nicchia: ${niche}.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            try {
+                const response = await fetchWithRetry(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text || "Errore di generazione. Riprovare.";
+                elPromptText.textContent = text;
+            } catch (error) {
+                elPromptText.textContent = 'Errore di connessione o generazione. Verificare la console.';
+                console.error(error);
+            } finally {
+                elCreativeBtn.disabled = false;
+                elCreativeBtn.textContent = 'Genera Prompt High-Ticket';
+            }
+        }
+        
+        // --- Utility Functions ---
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const textToCopy = element.textContent;
+
+            const tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            element.textContent = "Copiato!";
+            setTimeout(() => {
+                element.textContent = textToCopy;
+            }, 1500);
+        }
+
+        async function fetchWithRetry(url, options, maxRetries = 3) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.status !== 429) { 
+                        return response;
+                    }
+                    const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                } catch (error) {
+                    if (i === maxRetries - 1) throw error;
+                    const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+            throw new Error("Max retries exceeded");
+        }
+
+
+        // Initialize Simulation
+        updateSimulation();
+
+        // Chart.js Implementation for Scaling Phase
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('scalingChart').getContext('2d');
+            
+            // Generate Data Points for 90 Days
+            const labels = [];
+            const adSpendData = [];
+            const revenueData = [];
+            
+            for (let i = 0; i <= 90; i+=5) { 
+                labels.push(`Giorno ${i}`);
+                
+                let spend = 5000 + (Math.pow(i, 1.8) * 2); 
+                
+                let revenue = 0;
+                if (i < 10) {
+                    revenue = spend * 1.5; 
+                } else if (i < 30) {
+                    revenue = spend * 2.5; 
+                } else {
+                    revenue = spend * 3.8; 
+                }
+                
+                adSpendData.push(spend);
+                revenueData.push(revenue);
+            }
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Spesa Pubblicitaria (Ad Spend)',
+                            data: adSpendData,
+                            borderColor: '#64748B', 
+                            backgroundColor: 'rgba(100, 116, 139, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'Ricavi (Revenue)',
+                            data: revenueData,
+                            borderColor: '#10B981', 
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': € ' + formatNumber(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f1f5f9'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '€' + formatNumber(value / 1000) + 'k';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
